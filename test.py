@@ -1,44 +1,60 @@
-from collections import deque
-
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-
 class Solution:
+    def manacher(s) :
 
-    def minDepth(self, root):
+        if len(s) == 0:
+            return ""
 
-        if root == None:
-            return 0
+        T = preProcess(s)
 
-        if root.left == None and root.right == None:
-            return 1
-        else:
-            left = 1 + self.minDepth(root.left)
-            right = 1 + self.minDepth(root.right)
+        return T
 
-            if root.left and root.right:
-                return min(left, right)
-            else:
-                return max(left, right)
+        n = len(T)
 
-node3 = TreeNode(3)
-node9 = TreeNode(9)
-node20 = TreeNode(20)
-node15 = TreeNode(15)
-node7 = TreeNode(7)
+        P = [0] * n
 
-node3.left = node9
-node3.right = node20
-node20.left = node15
-node20.right = node7
+        C = R = 0
 
-node1 = TreeNode(1)
-node2 = TreeNode(2)
-node1.left = node2
+        for i in range(1, n - 1):
+
+            i_mirror = 2 * C - i
+
+            P[i] = min(R - i, P[i_mirror]) if R > i else 0
+
+            while T[i + 1 + P[i]] == T[i - 1 - P[i]]:
+                P[i] += 1
+
+            if i + P[i] > R:
+                C = i
+                R = i + P[i]
+
+        maxLen = centerIndex = 0
+
+        for i in range(1, n - 1):
+            if P[i] > maxLen:
+                maxLen = P[i]
+                centerIndex = i
+
+
+
+        return s[(centerIndex - 1 - maxLen) // 2 : maxLen]
+
+
+
+    def preProcess(s):
+
+        sb = []
+
+        for c in s:
+            sb.extend('#' + c)
+
+        sb.extend('#$')
+
+        return sb
+
+
+string = "abc"
+string = "aaa"
 
 s = Solution()
-result = s.minDepth(node3)
+result = s.manacher(string)
 print(result)

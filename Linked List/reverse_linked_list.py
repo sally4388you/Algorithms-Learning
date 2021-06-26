@@ -32,7 +32,6 @@ class Solution:
 
     def reverseBetween(self, head, m, n):
 
-        count = 0
         dummy = ListNode(0)
         dummy.next = head
 

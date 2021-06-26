@@ -22,10 +22,10 @@ class Solution:
 
         queue = deque([root])
 
-        while len(queue) > 0:
+        while queue:
             level = []
             size = len(queue)
-            for i in range(0, size):
+            for i in range(size):
                 head = queue.popleft()
                 level.append(head.val)
 
@@ -37,25 +37,26 @@ class Solution:
             result.append(level)
 
         return result
-
-    def recursion(self, root):
-        output = []
-        self.bfs(root, 0, output)
-        return output
     
-    def bfs(self, node, level, output):
-        if not node:
+    def bfs(self, root):
+
+        def recursion(node, level):
+
+            if len(output) <= level:
+                output.append([])
+
+            output[level].append(node.val)
+
+            if node.left:
+                recursion(node.left, level + 1)
+            if node.right:
+                recursion(node.right, level + 1)
+
             return
-        
-        if len(output) < level + 1:
-            output.append([])
-            
-        output[level].append(node.val)
-            
-        if node.left:
-            self.bfs(node.left, level + 1, output)
-        if node.right:
-            self.bfs(node.right, level + 1, output)
+
+        output = []
+        recursion(root, 0)
+        return output
 
 node3 = TreeNode(3)
 node9 = TreeNode(9)

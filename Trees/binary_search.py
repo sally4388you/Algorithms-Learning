@@ -16,6 +16,19 @@ class Solution:
 
         return -1
 
+    def another_iteration(self, num, target):
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            
+            mid = (left + right) // 2
+            if target > self.num[mid]:
+                left = mid + 1
+            else:
+                right = mid
+
+        return left
+
     def recursion(self, nums, target):
         return self.binarysearch(nums, 0, len(nums) - 1, target)
 
