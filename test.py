@@ -1,60 +1,39 @@
 class Solution:
-    def manacher(s) :
+    def findMin(self, nums):
 
-        if len(s) == 0:
-            return ""
+        if len(nums) <= 2:
+            return min(nums)
 
-        T = preProcess(s)
+        l, r = 0, len(nums) - 1
 
-        return T
+        while l <= r:
+            mid = (l + r) // 2
 
-        n = len(T)
+            # if nums[mid - 1] > nums[mid] and nums[mid] < nums[(mid + 1) % len(nums)]:
+                # return nums[mid]
 
-        P = [0] * n
+            print(mid)
 
-        C = R = 0
+            if nums[mid] > nums[(mid + 1)%len(nums)]:
+                return nums[(mid + 1)%len(nums)]
 
-        for i in range(1, n - 1):
+            if nums[mid - 1] > nums[mid]:
+                return nums[mid]
 
-            i_mirror = 2 * C - i
+            if nums[mid] > nums[0]:
+                l = mid + 1
+            else:
+                r = mid - 1
 
-            P[i] = min(R - i, P[i_mirror]) if R > i else 0
-
-            while T[i + 1 + P[i]] == T[i - 1 - P[i]]:
-                P[i] += 1
-
-            if i + P[i] > R:
-                C = i
-                R = i + P[i]
-
-        maxLen = centerIndex = 0
-
-        for i in range(1, n - 1):
-            if P[i] > maxLen:
-                maxLen = P[i]
-                centerIndex = i
+        return -1
 
 
-
-        return s[(centerIndex - 1 - maxLen) // 2 : maxLen]
-
-
-
-    def preProcess(s):
-
-        sb = []
-
-        for c in s:
-            sb.extend('#' + c)
-
-        sb.extend('#$')
-
-        return sb
-
-
-string = "abc"
-string = "aaa"
+nums = [2,3,4,5,1]
+nums = [5,1,2,3,4]
+nums = [4,5,6,7,0,1,2]
+nums = [1,2,3]
+# nums = [3,1,2]
 
 s = Solution()
-result = s.manacher(string)
+result = s.findMin(nums)
 print(result)

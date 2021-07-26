@@ -5,7 +5,7 @@ l = [x for x in nums if True]
 [start:stop:step]
 
 # 3. lambda function: lambda x : expression
-k = sorted(k lambda x: k[0])
+k = sorted(k, key = lambda x: x[0])
 
 # 4. stack extend
 stack.extend()
@@ -22,3 +22,15 @@ import heapq
 heap = []
 heapq.heappush(heap, (-dist(pt), pt))
 heapq.heappop(heap)
+
+# 7. set
+s = set()
+s.add()
+
+# 8. dictionary
+d = {}
+d.get(x, 0)
+next(iter(d))
+
+# 9. deep copy
+copy = L[:]
