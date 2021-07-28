@@ -28,6 +28,7 @@ class Solution:
     def Johnson(self, graph):
 
         n = len(graph)
+        dist = [[math.inf] * n for _ in range(n)]
         nonnegative_weights = [[math.inf] * n for _ in range(n)]
 
         # adjacency list
@@ -39,19 +40,26 @@ class Solution:
 
         # Weights used to modify the original weights
         h = self.BellmanFord(graph)
+        if h == False:
+            return 'Graph contains negative weight cycle'
 
 
         # Modify the weights to get rid of negative weights
-        for i in range(len(nonnegative_weights)):
-            for j in range(len(nonnegative_weights[i])):
+        for i in range(n):
+            for j in range(n):
                 if nonnegative_weights[i][j] != 0:
                     nonnegative_weights[i][j] = (nonnegative_weights[i][j] + h[i] - h[j])
 
 
         # Run Dijkstra for every vertex as source one by one
-        dist = [[math.inf] * n for _ in range(n)]
-        for src in range(len(graph)):
+        for src in range(n):
             dist = self.Dijkstra(nonnegative_weights, dist, src)
+
+
+        # correct distances
+        for u in range(n):
+            for v in range(n):
+                dist[u][v] += h[v] - h[u]
 
 
         return dist
@@ -75,8 +83,14 @@ class Solution:
         for _ in range(n):
             for u in range(len(G)):
                 for v, w in G[u]:
-                    if((dist[u] != math.inf) and (dist[u] + w < dist[v])):
+                    if dist[u] != math.inf and dist[u] + w < dist[v]:
                         dist[v] = dist[u] + w
+
+
+        for u in range(len(G)):
+            for v, w in G[u]:
+                if dist[u] != math.inf and dist[u] + w < dist[v]:
+                    return False
       
         # Don't send the value for the source added
         return dist[:n]
@@ -125,11 +139,12 @@ graph[2] = [(1, 4)]
 graph[3] = [(0, 2), (2, -5)]
 graph[4] = [(3, 6)]
 
-# # with a cycle
-# graph = [[]] * 3
-# graph[0] = [(1, 1)]
-# graph[1] = [(2, 2)]
-# graph[2] = [(0, 1)]
+
+# with a negative weight cycle
+graph = [[]] * 3
+graph[0] = [(1, -1)]
+graph[1] = [(2, -2)]
+graph[2] = [(0, -1)]
 
 
 s = Solution()
