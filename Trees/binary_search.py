@@ -5,7 +5,7 @@ class Solution:
     def iteration(self, nums, target):
         left = 0
         right = len(nums) - 1
-        while (left <= right):
+        while left <= right:
             mid = math.ceil((right - left) / 2) + left
             if nums[mid] == target:
                 return mid
@@ -16,13 +16,13 @@ class Solution:
 
         return -1
 
-    def another_iteration(self, num, target):
+    def another_iteration(self, nums, target):
         left = 0
         right = len(nums) - 1
         while left < right:
             
             mid = (left + right) // 2
-            if target > self.num[mid]:
+            if target > nums[mid]:
                 left = mid + 1
             else:
                 right = mid

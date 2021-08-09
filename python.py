@@ -1,4 +1,4 @@
-# 1. list comprehesion
+cvcx# 1. list comprehesion
 l = [x for x in nums if True]
 
 # 2. extended slices
@@ -34,3 +34,34 @@ next(iter(d))
 
 # 9. deep copy
 copy = L[:]
+
+# 10. binary search
+idx = bisect_left(array, num)
+
+# 11. OOP
+# 1) encapsulation, abstraction
+class Dog:
+
+    # Class attribute
+    species = "Canis familiaris"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # Replace .description() with __str__()
+    def __str__(self):
+        return f"{self.name} is {self.age} years old"
+
+    def speak(self, sound):
+        return f"{self.name} says {sound}"
+
+
+# 2) inherence
+class Bulldog(Dog):
+    # 3) polymorphism
+    def speak(self, sound="Arf"):
+        return f"{self.name} says {sound}"
+
+buddy = Dog("Buddy", 9)
+

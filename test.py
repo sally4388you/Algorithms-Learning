@@ -1,39 +1,26 @@
 class Solution:
-    def findMin(self, nums):
+    def characterReplacement(self, s, k):
+        d = {}
+        dist = [0] * len(s)
 
-        if len(nums) <= 2:
-            return min(nums)
+        for i in range(len(s)):
+            if s[i] not in d:
+                d[s[i]] = i
 
-        l, r = 0, len(nums) - 1
+            dist[i] = i - d[s[i]]
+            d[s[i]] = i
 
-        while l <= r:
-            mid = (l + r) // 2
+        for i in range(len(s)):
+            ;
 
-            # if nums[mid - 1] > nums[mid] and nums[mid] < nums[(mid + 1) % len(nums)]:
-                # return nums[mid]
+        return dist
 
-            print(mid)
-
-            if nums[mid] > nums[(mid + 1)%len(nums)]:
-                return nums[(mid + 1)%len(nums)]
-
-            if nums[mid - 1] > nums[mid]:
-                return nums[mid]
-
-            if nums[mid] > nums[0]:
-                l = mid + 1
-            else:
-                r = mid - 1
-
-        return -1
+        return 0
 
 
-nums = [2,3,4,5,1]
-nums = [5,1,2,3,4]
-nums = [4,5,6,7,0,1,2]
-nums = [1,2,3]
-# nums = [3,1,2]
+_s = "ABAB"
+k = 2
 
 s = Solution()
-result = s.findMin(nums)
+result = s.characterReplacement(_s, k)
 print(result)
