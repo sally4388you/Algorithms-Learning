@@ -37,3 +37,51 @@ While the cost of these two paths is different, once we are at the node C, we ha
 recurse(neighbor, stops + 1) + weight(node, neighbor)
 
 8. We need to return the result of recurse(src, 0) as the answer.
+
+```Python
+class Solution:
+    
+    def __init__(self):
+        self.adj_matrix = None
+        self.memo = {}
+    
+    def findShortest(self, node, stops, dst, n):
+            
+        # No need to go any further if the destination is reached    
+        if node == dst:
+            return 0
+        
+        # Can't go any further if no stops left
+        if stops < 0:
+            return float("inf")
+        
+        # If the result of this state is already cached, return it
+        if (node, stops) in self.memo:
+            return self.memo[(node, stops)]
+        
+        # Recursive calls over all the neighbors
+        ans = float("inf")
+        for neighbor in range(n):
+            if self.adj_matrix[node][neighbor] > 0:
+                ans = min(ans, self.findShortest(neighbor, stops-1, dst, n) + self.adj_matrix[node][neighbor])
+        
+        # Cache the result
+        self.memo[(node, stops)] = ans        
+        return ans
+    
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, K: int) -> int:
+        
+        self.adj_matrix = [[0 for _ in range(n)] for _ in range(n)]
+        self.memo = {}
+        for s, d, w in flights:
+            self.adj_matrix[s][d] = w
+        
+        result = self.findShortest(src, K, dst, n)
+        return -1 if result == float("inf") else result
+```
+
+**Complexity Analysis**
+
+Time Complexity: The time complexity for a recursive solution is defined by the number of recursive calls we make and the time it takes to process one recursive call. The number of recursive calls we can potentially make is \text{O}(\text{V} \cdot \text{K})O(V⋅K). In each recursive call, we iterate over a given node's neighbors. That takes time O(\text{V})O(V) because we are using an adjacency matrix. Thus, the overall time complexity is \text{O}(\text{V}^2 \cdot \text{K})O(V 
+2⋅K).
+Space Complexity: \text{O}(\text{V} \cdot \text{K} + \text{V}^2)O(V⋅K+V 2) where \text{O}(\text{V} \cdot \text{K})O(V⋅K) is occupied by the memo dictionary and the rest by the adjacency matrix structure we build in the beginning.
