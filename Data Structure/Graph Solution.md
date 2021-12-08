@@ -8,7 +8,7 @@ Use the optimal solutions for sub-problems to solve top-level problems.
 A base case.
 This problem fits the bill. We have a dedicated start and endpoint. We have a bunch of choices for each node in the form of its neighbors. And, we want to minimize the overall shortest distance from the source to the destination which can be represented as a recursive structure in terms of shortest distances of its neighbors to the destination. So, we can apply a dynamic programming approach to solve this problem. We'll look at a recursive implementation here with memoization first and then talk about the iterative approach as well.
 
-As with any recursive approach, we need to figure out the state of recursion. There are two parameters here which will control our recursion. One is obviously the node itself. The other is the number of steps. Let's call our recursion function recurse and define what the state of recursion looks like. \text{recurse}(\text{node},\text{stops})recurse(node,stops) will basically return the shortest distance for us to reach the destination from \text{node}node considering that there are stops left. This being said, it's easy to figure out what the top-level problem would be. It would be \text{recurse}(\text{0},\text{K})recurse(0,K).
+As with any recursive approach, we need to figure out the state of recursion. There are two parameters here which will control our recursion. One is obviously the node itself. The other is the number of steps. Let's call our recursion function recurse and define what the state of recursion looks like. recurse(node,stops) will basically return the shortest distance for us to reach the destination from node considering that there are stops left. This being said, it's easy to figure out what the top-level problem would be. It would be recurse(0,K).
 
 Let's consider the following graph to understand why memoization (or caching) is required here.
 ![img5](https://leetcode.com/problems/cheapest-flights-within-k-stops/Figures/787/img5.png)
@@ -16,7 +16,7 @@ Let's consider the following graph to understand why memoization (or caching) is
 Say we start the source node A and build our recursion tree from there. There are two possible routes of getting to the node C with exactly 2 stops. Let's look at what these are.
 ![img6](https://leetcode.com/problems/cheapest-flights-within-k-stops/Figures/787/img6.png)
 
-While the cost of these two paths is different, once we are at the node C, we have 2 steps less than what we had when we started off from the source node A. Our recursion representation doesn't care about the path you took to get to a node. It is about the shortest (cheapest) path from the current node with the given number of steps to get to a destination. In that sense, both these scenarios are exactly the same because both lead us to the same recursion state which is (\text{recurse}(\text{C}, \text{K-2}))(recurse(C,K-2)) and hence, the result for this recursion state can be cached or memoized.
+While the cost of these two paths is different, once we are at the node C, we have 2 steps less than what we had when we started off from the source node A. Our recursion representation doesn't care about the path you took to get to a node. It is about the shortest (cheapest) path from the current node with the given number of steps to get to a destination. In that sense, both these scenarios are exactly the same because both lead us to the same recursion state which is (recurse(C,K-2)) and hence, the result for this recursion state can be cached or memoized.
 
 **Algorithm**
 
