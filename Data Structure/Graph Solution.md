@@ -82,6 +82,5 @@ class Solution:
 
 **Complexity Analysis**
 
-Time Complexity: The time complexity for a recursive solution is defined by the number of recursive calls we make and the time it takes to process one recursive call. The number of recursive calls we can potentially make is \text{O}(\text{V} \cdot \text{K})O(V⋅K). In each recursive call, we iterate over a given node's neighbors. That takes time O(\text{V})O(V) because we are using an adjacency matrix. Thus, the overall time complexity is \text{O}(\text{V}^2 \cdot \text{K})O(V 
-2⋅K).
-Space Complexity: \text{O}(\text{V} \cdot \text{K} + \text{V}^2)O(V⋅K+V 2) where \text{O}(\text{V} \cdot \text{K})O(V⋅K) is occupied by the memo dictionary and the rest by the adjacency matrix structure we build in the beginning.
+Time Complexity: The time complexity for a recursive solution is defined by the number of recursive calls we make and the time it takes to process one recursive call. The number of recursive calls we can potentially make is O(V⋅K). In each recursive call, we iterate over a given node's neighbors. That takes time O(V) because we are using an adjacency matrix. Thus, the overall time complexity is O(V^2⋅K).
+Space Complexity: (V⋅K+V^2) where O(V⋅K) is occupied by the memo dictionary and the rest by the adjacency matrix structure we build in the beginning.
