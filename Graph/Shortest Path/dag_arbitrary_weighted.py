@@ -48,6 +48,7 @@ class Solution:
 
         while stack:
             node = stack.pop()
+            visited[node] = True
             for n, w in graph[node]:
                 if visited[n] is False:
                     visited[n] = True

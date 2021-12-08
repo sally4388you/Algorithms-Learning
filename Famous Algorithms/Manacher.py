@@ -27,7 +27,6 @@ class Solution:
                 C = i
                 R = i + P[i]
 
-        return P
 
         maxLen, centerIndex = max((n, i) for i, n in enumerate(P))
 

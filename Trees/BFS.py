@@ -26,13 +26,13 @@ class Solution:
             level = []
             size = len(queue)
             for i in range(size):
-                head = queue.popleft()
-                level.append(head.val)
+                node = queue.popleft()
+                level.append(node.val)
 
-                if head.left:
-                    queue.append(head.left)
-                if head.right:
-                    queue.append(head.right)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
 
             result.append(level)
 

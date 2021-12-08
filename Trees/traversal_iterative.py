@@ -17,7 +17,7 @@ class Solution:
                 stack.append(node.left)
         return output
 
-    def inorderTraversal(self, root):
+    def inorderTraversal(dself, root):
         stack = []
         node = root
         output = []

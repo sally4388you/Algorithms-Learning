@@ -13,6 +13,7 @@ class Solution:
         while queue:
 
             node, level = queue.popleft()
+            visited[node] = True
             for n in graph[node]:
 
                 if visited[n] is False:
@@ -21,8 +22,9 @@ class Solution:
                     queue.append((n, level + 1))
 
                     # can stop early if necessay
+                    # dist is not necessary
                     # if n == dst:
-                    #     return dist[n]
+                    #     return level + 1
 
         return dist
   

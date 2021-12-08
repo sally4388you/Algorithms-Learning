@@ -43,6 +43,7 @@ class Solution:
         visited = set()
         while queue:
             u = queue.popleft()
+            visited.add(u)
             for v, w in graph[u]:
                 if v not in visited:
                     visited.add(v)
