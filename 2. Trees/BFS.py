@@ -4,6 +4,18 @@ import math
 # 1 queue + 1 dummy node
 # 1 queue (Best)
 
+
+
+# Space complexity:
+# 1. BFS
+# * Balanced Tree: O(N/2) -> O(N)
+# * Linked List like Tree: O(1)
+#
+# 2. DFS
+# * Balanced Tree: O(H) -> O(logN)
+# * Linked List like Tree: O(N)
+
+
 from collections import deque
 
 class TreeNode:

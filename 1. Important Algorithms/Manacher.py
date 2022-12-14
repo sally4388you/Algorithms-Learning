@@ -8,6 +8,7 @@ class Solution:
         # T = self.preProcess(s)
         T = '#'.join('^{}$'.format(s))
         n = len(T)
+        # largest radius
         P = [0] * n
         # Center and Radius
         C = R = 0

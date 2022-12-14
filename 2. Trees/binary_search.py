@@ -15,6 +15,7 @@ class Solution:
                 right = mid - 1
 
         return -1
+        # return mid
 
     def another_iteration(self, nums, target):
         left = 0

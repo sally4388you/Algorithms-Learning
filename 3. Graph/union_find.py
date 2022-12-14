@@ -1,3 +1,4 @@
+# Disjoint Set Union
 class DSUBasic:
     def __init__(self, n):
         self.parent = [i for i in range(n)]
@@ -16,6 +17,7 @@ class DSUBasic:
         return
 
 
+# Union Find by Rank (another one is by size)
 class DSU:
     def __init__(self, n):
         self.parent = [i for i in range(n)]
@@ -38,6 +40,30 @@ class DSU:
         else:
             self.parent[xset] = self.parent[yset]
             self.rank[yset] += 1
+
+
+# Union Find by Size
+class DSUbySize:
+    def __init__(self, n):
+        self.parent = [i for i in range(n)]
+        self.size = [1 for _ in range(n)]
+
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        xset = self.find(x)
+        yset = self.find(y)
+        if xset == yset:
+            return
+        if self.size[xset] > self.size[yset]:
+            self.size[xset] += self.size[yset]
+            self.parent[yset] = self.parent[xset]
+        else:
+            self.size[yset] += self.size[xset]
+            self.parent[xset] = self.parent[yset]
 
 
 class Solution:

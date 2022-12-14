@@ -80,6 +80,15 @@ class Solution:
                     # `left` remains the same
                     right -= 1
 
+
+            # idx = left
+            # for i in range(left, right):
+            #     if nums[i] < pivot:
+            #         nums[idx], nums[i] = nums[i], nums[idx]
+            #         idx += 1
+                    
+            # nums[right], nums[idx] = nums[idx], nums[right]
+
             # 4. the range is really important
             recursion(head, right)
             recursion(right + 2, tail)

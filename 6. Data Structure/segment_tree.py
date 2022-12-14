@@ -96,8 +96,8 @@ class Solution:
         # so that it doesn't need to create 10 ** 4 nodes but just n nodes.
         d = {val: idx for idx, val in enumerate(sorted(set(nums)))}
 
-        # tree, result = SegmentTree(len(d)), []
-        tree, result = SegmentTreeByArr(len(d)), []
+        tree, result = SegmentTree(len(d)), []
+        # tree, result = SegmentTreeByArr(len(d)), []
         for i in range(len(nums) - 1, -1, -1):
             result.append(tree.query(0, d[nums[i]] - 1))
             tree.update(d[nums[i]])

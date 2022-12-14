@@ -6,6 +6,7 @@ dp = [[0] * len(grid[0]) for _ in range(len(grid))]
 [start:stop:step]
 
 # 3. lambda function: lambda x : expression
+# smaller -> bigger
 k = sorted(k, key = lambda x: x[0])
 k.sort(key = lambda x: x[0])
 # sort by two keys. First by len(x) then x[1]
@@ -21,6 +22,7 @@ stack.extend([e1, e2])
 # 5. queue
 from collections import deque
 queue = deque([src])
+# O(1)
 queue.popleft()
 queue.append()
 
@@ -28,7 +30,11 @@ queue.append()
 # https://docs.python.org/3/library/heapq.html
 import heapq
 heap = []
-heapq.heappush(heap, (-dist(pt), pt))
+# always pick the smallest distance
+# O(log n)
+heapq.heappush(heap, (distance, value))
+heapq.heappush(heap, value)
+# O(log n)
 heapq.heappop(heap)
 # The interesting property of a heap is that heap[0] is always its smallest element.
 smallest = heap[0]
@@ -36,6 +42,7 @@ smallest = heap[0]
 # 7. set
 s = set()
 s.add()
+s.update(list)
 
 # 8. dictionary
 d = {}
@@ -86,4 +93,11 @@ num = ord(s)
 
 # 13. list to string
 strings = ''.join(lists)
+
+# 14. global variables
+nonlocal last, first
+
+# 15. for loop
+for key, value in enumerate(values):
+    print(key, value)
 
